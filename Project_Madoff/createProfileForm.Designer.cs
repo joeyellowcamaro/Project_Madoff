@@ -60,7 +60,7 @@
             this.userNameLab.TabIndex = 2;
             this.userNameLab.Text = "User Name";
             // 
-            // createProfile
+            // createProfileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -68,7 +68,8 @@
             this.Controls.Add(this.userNameLab);
             this.Controls.Add(this.createProBtn);
             this.Controls.Add(this.createProTBox);
-            this.Name = "createProfile";
+            this.Name = "createProfileForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Project Madoff";
             this.Load += new System.EventHandler(this.createProfile_Load);
             this.ResumeLayout(false);

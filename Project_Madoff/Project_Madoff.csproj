@@ -54,6 +54,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="applicationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="applicationForm.Designer.cs">
+      <DependentUpon>applicationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="createProfileForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="applicationForm.resx">
+      <DependentUpon>applicationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="createProfileForm.resx">
       <DependentUpon>createProfileForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -38,33 +38,14 @@ namespace Project_Madoff
         {
 
             String name = this.nameTBox.Text;
+            String csvLocation;
 
             using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "CSV|*.csv", ValidateNames = true })
             {
                 if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    csvLocTBox.Text = ofd.SafeFileName;
-                    String csvLocation = ofd.FileName;
-
-                    //var textReader = File.Open(@"F:\College\CSCI 491\C_YSQ_Solution\test.csv");
-                    //var csv = new CsvReader(sr);
-                    //using (var reader = new StreamReader(file.InputStream))
-                    using (var sr = new StreamReader(csvLocation))
-                    {
-                        var csv = new CsvReader(sr);
-
-                        String profileName = csv.GetField(0);
-
-                        if (profileName.Equals(name))
-                        {
-                            MessageBox.Show("Error 404");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Success");
-                        }
-
-                    }
+                    csvLocTBox.Text = ofd.FileName;
+                    csvLocation = ofd.FileName;
                 }
             }
 
@@ -73,14 +54,46 @@ namespace Project_Madoff
         private void loginBtn_Click(object sender, EventArgs e)
         {
             var userName = nameTBox.Text;
+
+            String name = this.nameTBox.Text;
+
+
+            String csvLocation = this.csvLocTBox.Text;
+
+
+            using (var reader = new StreamReader(csvLocation))
+            using (var csvReader = new CsvReader(reader))
+            {
+
+
+                csvReader.Read();
+
+                String profileName = csvReader.GetField(1);
+
+                if (profileName.Equals(name))
+                {
+                    MessageBox.Show("Error 404");
+                }
+                else
+                {
+                    applicationForm open = new applicationForm();
+                    this.Hide();
+                    open.ShowDialog();
+                    this.Close();
+
+                }
+
+            }
+
         }
 
         private void createProBtn_Click(object sender, EventArgs e)
         {
 
-            createProfileForm create = new createProfileForm();
-            create.Show();
+            createProfileForm open = new createProfileForm();
+            open.Show();
 
         }
     }
 }
+

@@ -41,7 +41,7 @@ namespace Project_Madoff
             };
 
 
-            using (var textWriter = File.CreateText(@"F:\College\CSCI 491\C_YSQ_Solution\test.csv"))
+            using (var textWriter = File.CreateText(@"F:\College\CSCI 491\Project Madoff\Project_Madoff_Solution\userdata\test.csv"))
             using (var csv = new CsvWriter(textWriter))
 
             {

@@ -16,3 +16,4 @@ F:\College\CSCI 491\Project Madoff\Project_Madoff_Solution\Project_Madoff\bin\De
 F:\College\CSCI 491\Project Madoff\Project_Madoff_Solution\Project_Madoff\bin\Debug\LumenWorks.Framework.IO.pdb
 F:\College\CSCI 491\Project Madoff\Project_Madoff_Solution\Project_Madoff\bin\Debug\LumenWorks.Framework.IO.xml
 F:\College\CSCI 491\Project Madoff\Project_Madoff_Solution\Project_Madoff\obj\Debug\Project_Madoff.createProfileForm.resources
+F:\College\CSCI 491\Project Madoff\Project_Madoff_Solution\Project_Madoff\obj\Debug\Project_Madoff.applicationForm.resources
