@@ -37,13 +37,12 @@ namespace Project_Madoff
 
             var data = new[]
             {
-                new Database { ProfileName = name, Cash = 50000, PortVal = 0}
+                new Database {ProfileName = name, Cash = 50000, PortVal = 0}
             };
 
 
             using (var textWriter = File.CreateText(@"F:\College\CSCI 491\Project Madoff\Project_Madoff_Solution\userdata\test.csv"))
             using (var csv = new CsvWriter(textWriter))
-
             {
                 csv.Configuration.Delimiter = ",";
                 csv.Configuration.HasHeaderRecord = false;
@@ -69,8 +68,8 @@ namespace Project_Madoff
     public class Database
     {
         public string ProfileName { get; set; }
-        public float Cash { get; set; }
-        public float PortVal { get; set; }
+        public float  Cash        { get; set; }
+        public float  PortVal     { get; set; }
     }
 
 }

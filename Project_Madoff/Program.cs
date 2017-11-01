@@ -15,13 +15,12 @@ namespace Project_Madoff
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new loginForm());
+           Application.EnableVisualStyles();
+           Application.SetCompatibleTextRenderingDefault(false);
+           Application.Run(new loginForm());
 
 
-            /* 
-            * 
+         /* 
             var quote_service = new QuoteService();
 
             var quotes = quote_service.Quote("MSFT", "GOOG").Return(QuoteReturnParameter.Symbol,
@@ -34,8 +33,8 @@ namespace Project_Madoff
             {
                 Console.WriteLine("{0} - {1} - {2}", quote.Symbol, quote.Name, quote.Open);
             }
-
-            */
+        */
+            
 
         }
     }

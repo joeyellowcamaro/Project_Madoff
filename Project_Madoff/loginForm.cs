@@ -54,6 +54,7 @@ namespace Project_Madoff
         private void loginBtn_Click(object sender, EventArgs e)
         {
             var userName = nameTBox.Text;
+            int checker = 0;
 
             String name = this.nameTBox.Text;
 
@@ -68,22 +69,46 @@ namespace Project_Madoff
 
                 csvReader.Read();
 
-                String profileName = csvReader.GetField(1);
+                String profileName = csvReader.GetField(0);
+                float cash         = float.Parse(csvReader.GetField(1));
+                float portVal      = float.Parse(csvReader.GetField(2));
 
                 if (profileName.Equals(name))
                 {
-                    MessageBox.Show("Error 404");
+                    
+                    
+
                 }
                 else
                 {
-                    applicationForm open = new applicationForm();
-                    this.Hide();
-                    open.ShowDialog();
-                    this.Close();
+
+                    
 
                 }
+            }
+
+
+            csvReader.Read();
+
+            String profileName = csvReader.GetField(0);
+            float cash = float.Parse(csvReader.GetField(1));
+            float portVal = float.Parse(csvReader.GetField(2));
+
+            if (checker == 1)
+            {
+
+                applicationForm open = new applicationForm(csvLocation, profileName, cash, portVal);
+                this.Hide();
+                open.ShowDialog();
+                this.Close();
 
             }
+            else
+            {
+                MessageBox.Show("Error 404");
+            }
+
+
 
         }
 
