@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
+using System.Resources;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,6 +30,9 @@ namespace Project_Madoff
         {
             InitializeComponent();
 
+            webBrowser.ScriptErrorsSuppressed = true;
+            
+
             this.csvloc  = csvloc;
             this.name    = name;
             this.cash    = cash;
@@ -50,7 +55,7 @@ namespace Project_Madoff
 
         }
 
-        private void sharesBox_TextChanged(object sender, EventArgs e)
+        private void sharesTBox_TextChanged(object sender, EventArgs e)
         {
             
         }
@@ -58,18 +63,23 @@ namespace Project_Madoff
         private void buyBtn_Click(object sender, EventArgs e)
         {
 
-            /*
+            
             var quote_service = new QuoteService();
 
-            String ticker = this.tickerTBox.Text;
+            String ticker = this.tickerTBox.Text.Replace(" ", "");
 
 
+           // if (ticker == null)
+           // {
+           //
+           // }
+           // else
+           // {
+           //     var quote = quote_service.Quote(ticker).Return(QuoteReturnParameter.Open);
+            //}
+            
 
-            var quote = quote_service.Quote(ticker).Return(QuoteReturnParameter.Open);
 
-
-            MessageBox.Show(quote.Open);
-            */
 
             /*
             using (FileStream textwriter = File.Open(csvloc, FileMode.Append, FileAccess.Write))
@@ -84,33 +94,37 @@ namespace Project_Madoff
             // using (var sr = new StreamReader(csvloc))
             //{
 
-
-
-
-            var data = new[]
-                {
-                    new Portfolio {Ticker = tickerTBox.Text, Shares = sharesTBox.Text, TotalMon = "FIX" }
-                };
-
-
-
-            using (var textWriter = new StreamWriter(csvloc, append: true))
-            using (var csv = new CsvWriter(textWriter))
+            if(sharesTBox.Text != "0")
             {
 
 
-                csv.Configuration.Delimiter = ",";
-                csv.Configuration.HasHeaderRecord = false;
-                csv.Configuration.AutoMap<Portfolio>();
+                    using (var textreader = new StreamReader(csvloc))
+                    using (var textWriter = new StreamWriter(csvloc, append: true))
+                    using (var csvWrite = new CsvWriter(textWriter))
+                    using (var csRead   = new CsvReader(textreader))
+                    {
 
+                        var data = new[]
+                        {
+                            new Portfolio {Ticker = tickerTBox.Text, Shares = sharesTBox.Text, TotalMon = "FIX" }
+                        };
+
+
+                        csvWrite.Configuration.Delimiter = ",";
+                        csvWrite.Configuration.HasHeaderRecord = false;
+                        csvWrite.Configuration.AutoMap<Portfolio>();
+
+
+                        csvWrite.WriteRecords(data);
+                        textWriter.Flush();
+
+                    }
                 
-                csv.WriteRecords(data);
-                textWriter.Flush();
-
+            }
+            else
+            {
 
             }
-            
-
 
         }
 
@@ -121,6 +135,8 @@ namespace Project_Madoff
 
         private void incBtn_Click(object sender, EventArgs e)
         {
+            this.incBtn.BackgroundImage = Project_Madoff.Properties.Resources.upArrow;
+
 
             num++;
             sharesTBox.Text = num.ToString();
@@ -138,15 +154,29 @@ namespace Project_Madoff
             {
                 num = 0;
             }
-
             
             sharesTBox.Text = num.ToString();
 
         }
 
+        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
 
 
 
+        }
+
+        private void webTBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        
+        private void webBtn_Click(object sender, EventArgs e)
+        {
+            //webBrowser.Navigate("https://finance.yahoo.com/chart/" + webTBox.Text + "/", null, null, "User-Agent: Here Put The User Agent");
+            //https://finviz.com/quote.ashx?t=AAPL
+            webBrowser.Navigate("https://finviz.com/quote.ashx?t=" + webTBox.Text, null, null, "User-Agent: Here Put The User Agent");
+        }
 
         /*
          * 
@@ -174,6 +204,5 @@ namespace Project_Madoff
         public string  Shares   { get; set; }
         public string  TotalMon { get; set; }
     }
-
 
 }

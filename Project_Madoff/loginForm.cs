@@ -55,49 +55,73 @@ namespace Project_Madoff
         {
             var userName = nameTBox.Text;
             int checker = 0;
+            float cash = 0;
+            float portVal = 0;
 
             String name = this.nameTBox.Text;
-
-
             String csvLocation = this.csvLocTBox.Text;
 
-
+        
+            
             using (var reader = new StreamReader(csvLocation))
             using (var csvReader = new CsvReader(reader))
             {
 
-
                 csvReader.Read();
 
                 String profileName = csvReader.GetField(0);
-                float cash         = float.Parse(csvReader.GetField(1));
-                float portVal      = float.Parse(csvReader.GetField(2));
+                cash         = float.Parse(csvReader.GetField(1));
+                portVal      = float.Parse(csvReader.GetField(2));
 
                 if (profileName.Equals(name))
                 {
-                    
-                    
+
+                    checker = 1;
 
                 }
                 else
                 {
 
-                    
+
 
                 }
             }
+            
+
+        /*
+            do
+            {
+                var reader = new StreamReader(csvLocation);
+                var csvReader = new CsvReader(reader);
 
 
-            csvReader.Read();
+                csvReader.Read();
 
-            String profileName = csvReader.GetField(0);
-            float cash = float.Parse(csvReader.GetField(1));
-            float portVal = float.Parse(csvReader.GetField(2));
+                String profileName = csvReader.GetField(0);
+                cash = float.Parse(csvReader.GetField(1));
+                portVal = float.Parse(csvReader.GetField(2));
+
+                if (profileName.Equals(name))
+                {
+
+                    checker = 1;
+
+                }
+                else
+                {
+
+
+
+                }
+            } while (checker != 1);
+          */
+            
+
 
             if (checker == 1)
             {
 
-                applicationForm open = new applicationForm(csvLocation, profileName, cash, portVal);
+                applicationForm open = new applicationForm(csvLocation, name, cash, portVal);
                 this.Hide();
                 open.ShowDialog();
                 this.Close();
