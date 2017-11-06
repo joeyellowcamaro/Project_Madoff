@@ -51,6 +51,7 @@ namespace Project_Madoff
             this.changePortBtn = new System.Windows.Forms.Button();
             this.mkPortBtn = new System.Windows.Forms.Button();
             this.viewPortBtn = new System.Windows.Forms.Button();
+            this.aiBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tickerTBox
@@ -221,6 +222,7 @@ namespace Project_Madoff
             this.changePortBtn.TabIndex = 17;
             this.changePortBtn.Text = "Change Portfolio";
             this.changePortBtn.UseVisualStyleBackColor = true;
+            this.changePortBtn.Click += new System.EventHandler(this.changePortBtn_Click);
             // 
             // mkPortBtn
             // 
@@ -231,6 +233,7 @@ namespace Project_Madoff
             this.mkPortBtn.TabIndex = 18;
             this.mkPortBtn.Text = "Create Portfolio";
             this.mkPortBtn.UseVisualStyleBackColor = true;
+            this.mkPortBtn.Click += new System.EventHandler(this.mkPortBtn_Click);
             // 
             // viewPortBtn
             // 
@@ -240,6 +243,17 @@ namespace Project_Madoff
             this.viewPortBtn.TabIndex = 19;
             this.viewPortBtn.Text = "View Portfolio";
             this.viewPortBtn.UseVisualStyleBackColor = true;
+            this.viewPortBtn.Click += new System.EventHandler(this.viewPortBtn_Click);
+            // 
+            // aiBtn
+            // 
+            this.aiBtn.Location = new System.Drawing.Point(940, 34);
+            this.aiBtn.Name = "aiBtn";
+            this.aiBtn.Size = new System.Drawing.Size(81, 24);
+            this.aiBtn.TabIndex = 20;
+            this.aiBtn.Text = "Aask Madoff";
+            this.aiBtn.UseVisualStyleBackColor = true;
+            this.aiBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // applicationForm
             // 
@@ -247,6 +261,7 @@ namespace Project_Madoff
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1046, 843);
+            this.Controls.Add(this.aiBtn);
             this.Controls.Add(this.viewPortBtn);
             this.Controls.Add(this.mkPortBtn);
             this.Controls.Add(this.changePortBtn);
@@ -298,5 +313,6 @@ namespace Project_Madoff
         private Button changePortBtn;
         private Button mkPortBtn;
         private Button viewPortBtn;
+        private Button aiBtn;
     }
 }

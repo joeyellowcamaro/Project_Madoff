@@ -53,14 +53,19 @@ namespace Project_Madoff
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
+            
             var userName = nameTBox.Text;
             int checker = 0;
-            float cash = 0;
-            float portVal = 0;
+            //float cash = 0;
+            //float portVal = 0;
 
             String name = this.nameTBox.Text;
+            
+
             String csvLocation = this.csvLocTBox.Text;
 
+            
+            String profileName;
         
             
             using (var reader = new StreamReader(csvLocation))
@@ -69,59 +74,26 @@ namespace Project_Madoff
 
                 csvReader.Read();
 
-                String profileName = csvReader.GetField(0);
+                profileName  = csvReader.GetField(0);
+
+                /*
                 cash         = float.Parse(csvReader.GetField(1));
                 portVal      = float.Parse(csvReader.GetField(2));
+                */
 
                 if (profileName.Equals(name))
                 {
-
                     checker = 1;
-
                 }
-                else
-                {
 
-
-
-                }
             }
             
-
-        /*
-            do
-            {
-                var reader = new StreamReader(csvLocation);
-                var csvReader = new CsvReader(reader);
-
-
-                csvReader.Read();
-
-                String profileName = csvReader.GetField(0);
-                cash = float.Parse(csvReader.GetField(1));
-                portVal = float.Parse(csvReader.GetField(2));
-
-                if (profileName.Equals(name))
-                {
-
-                    checker = 1;
-
-                }
-                else
-                {
-
-
-
-                }
-            } while (checker != 1);
-          */
-            
-
 
             if (checker == 1)
             {
 
-                applicationForm open = new applicationForm(csvLocation, name, cash, portVal);
+              //applicationForm open = new applicationForm(csvLocation, name, cash, portVal);
+                applicationForm open = new applicationForm(csvLocation);
                 this.Hide();
                 open.ShowDialog();
                 this.Close();
@@ -129,11 +101,38 @@ namespace Project_Madoff
             }
             else
             {
-                MessageBox.Show("Error 404");
+                MessageBox.Show("Incorrect user name");
+                return;
             }
 
 
+            /*
+                do
+                {
+                    var reader = new StreamReader(csvLocation);
+                    var csvReader = new CsvReader(reader);
 
+
+                    csvReader.Read();
+
+                    String profileName = csvReader.GetField(0);
+                    cash = float.Parse(csvReader.GetField(1));
+                    portVal = float.Parse(csvReader.GetField(2));
+
+                    if (profileName.Equals(name))
+                    {
+
+                        checker = 1;
+
+                    }
+                    else
+                    {
+
+
+
+                    }
+                } while (checker != 1);
+              */
         }
 
         private void createProBtn_Click(object sender, EventArgs e)

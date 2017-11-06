@@ -66,6 +66,12 @@
     <Compile Include="createProfileForm.Designer.cs">
       <DependentUpon>createProfileForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="createPortfolioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="createPortfolioForm.Designer.cs">
+      <DependentUpon>createPortfolioForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="loginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="createProfileForm.resx">
       <DependentUpon>createProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="createPortfolioForm.resx">
+      <DependentUpon>createPortfolioForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="loginForm.resx">
       <DependentUpon>loginForm.cs</DependentUpon>

@@ -31,11 +31,13 @@
             this.createProTBox = new System.Windows.Forms.TextBox();
             this.createProBtn = new System.Windows.Forms.Button();
             this.userNameLab = new System.Windows.Forms.Label();
+            this.csvNameTBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // createProTBox
             // 
-            this.createProTBox.Location = new System.Drawing.Point(234, 104);
+            this.createProTBox.Location = new System.Drawing.Point(239, 82);
             this.createProTBox.Name = "createProTBox";
             this.createProTBox.Size = new System.Drawing.Size(100, 20);
             this.createProTBox.TabIndex = 0;
@@ -54,17 +56,36 @@
             // userNameLab
             // 
             this.userNameLab.AutoSize = true;
-            this.userNameLab.Location = new System.Drawing.Point(168, 107);
+            this.userNameLab.Location = new System.Drawing.Point(173, 85);
             this.userNameLab.Name = "userNameLab";
             this.userNameLab.Size = new System.Drawing.Size(60, 13);
             this.userNameLab.TabIndex = 2;
             this.userNameLab.Text = "User Name";
+            // 
+            // csvNameTBox
+            // 
+            this.csvNameTBox.Location = new System.Drawing.Point(239, 135);
+            this.csvNameTBox.Name = "csvNameTBox";
+            this.csvNameTBox.Size = new System.Drawing.Size(100, 20);
+            this.csvNameTBox.TabIndex = 3;
+            this.csvNameTBox.TextChanged += new System.EventHandler(this.csvNameTBox_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(361, 129);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 26);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Create a name \r\nfor your portfolio\r\n";
             // 
             // createProfileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(579, 268);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.csvNameTBox);
             this.Controls.Add(this.userNameLab);
             this.Controls.Add(this.createProBtn);
             this.Controls.Add(this.createProTBox);
@@ -82,5 +103,7 @@
         private System.Windows.Forms.TextBox createProTBox;
         private System.Windows.Forms.Button createProBtn;
         private System.Windows.Forms.Label userNameLab;
+        private System.Windows.Forms.TextBox csvNameTBox;
+        private System.Windows.Forms.Label label1;
     }
 }

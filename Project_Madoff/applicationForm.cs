@@ -18,30 +18,68 @@ namespace Project_Madoff
     public partial class applicationForm : Form
     {
 
-        public string csvloc  { get; set; }
-        public string name    { get; set; }
-        public float  cash    { get; set; }
-        public float  portval { get; set; }
+        public string csvLoc    { get; set; }
+        public string name      { get; set; }
+        public float  cash      { get; set; }
+        public float  portVal   { get; set; }
+        private string directory { get; set; }
 
         private static int num;
 
 
-        public applicationForm(String csvloc, String name, float cash, float portVal)
+      //public applicationForm(String csvloc, String name, float cash, float portVal)
+        public applicationForm(String csvLocation)
         {
             InitializeComponent();
 
             webBrowser.ScriptErrorsSuppressed = true;
-            
 
-            this.csvloc  = csvloc;
+            this.csvLoc = csvLocation;
+
+
+            /*
             this.name    = name;
             this.cash    = cash;
-            this.portval = portVal;
+            this.portVal = portVal;
+           
 
             nameLabel.Text    = name;
             cashLabel.Text    = "$" + Convert.ToString(cash);
             portValLabel.Text = "$" + Convert.ToString(portVal);
+            */
+
             
+            float  csvcash = 0;
+            float  csvportVal = 0;
+            String csvprofileName;
+            //String predirectory;
+
+
+            directory = csvLoc.TrimEnd('\\');
+
+            directory.Remove(directory.LastIndexOf('\\') + 1);
+
+            
+            using (var reader = new StreamReader(csvLoc))
+            using (var csvReader = new CsvReader(reader))
+            {
+
+                csvReader.Read();
+
+                csvprofileName = csvReader.GetField(0);
+                csvcash         = float.Parse(csvReader.GetField(1));
+                csvportVal      = float.Parse(csvReader.GetField(2));
+
+                this.name    = csvprofileName;
+                this.cash    = csvcash;
+                this.portVal = csvportVal;
+
+            }
+
+            nameLabel.Text = name;
+            cashLabel.Text = "$" + Convert.ToString(cash);
+            portValLabel.Text = "$" + Convert.ToString(portVal);
+
 
         }
 
@@ -94,35 +132,46 @@ namespace Project_Madoff
             // using (var sr = new StreamReader(csvloc))
             //{
 
-            if(sharesTBox.Text != "0")
+            if (sharesTBox.Text != "0")
             {
 
 
-                    using (var textreader = new StreamReader(csvloc))
-                    using (var textWriter = new StreamWriter(csvloc, append: true))
-                    using (var csvWrite = new CsvWriter(textWriter))
-                    using (var csRead   = new CsvReader(textreader))
+                using (var textreader = new StreamReader(csvLoc))
+                using (var csRead = new CsvReader(textreader))
+                {
+
+
+
+
+
+                }
+
+
+                using (var textWriter = new StreamWriter(csvLoc, append: true))
+                using (var csvWrite = new CsvWriter(textWriter))
+                {
+
+                    var data = new[]
                     {
-
-                        var data = new[]
-                        {
-                            new Portfolio {Ticker = tickerTBox.Text, Shares = sharesTBox.Text, TotalMon = "FIX" }
-                        };
+                        new Portfolio {Ticker = tickerTBox.Text, Shares = sharesTBox.Text, TotalMon = "FIX" }
+                    };
 
 
-                        csvWrite.Configuration.Delimiter = ",";
-                        csvWrite.Configuration.HasHeaderRecord = false;
-                        csvWrite.Configuration.AutoMap<Portfolio>();
+                    csvWrite.Configuration.Delimiter = ",";
+                    csvWrite.Configuration.HasHeaderRecord = false;
+                    csvWrite.Configuration.AutoMap<Portfolio>();
 
 
-                        csvWrite.WriteRecords(data);
-                        textWriter.Flush();
+                    csvWrite.WriteRecords(data);
+                    textWriter.Flush();
 
-                    }
+                }
                 
             }
             else
             {
+
+
 
             }
 
@@ -173,10 +222,50 @@ namespace Project_Madoff
         
         private void webBtn_Click(object sender, EventArgs e)
         {
-            //webBrowser.Navigate("https://finance.yahoo.com/chart/" + webTBox.Text + "/", null, null, "User-Agent: Here Put The User Agent");
-            //https://finviz.com/quote.ashx?t=AAPL
+        
             webBrowser.Navigate("https://finviz.com/quote.ashx?t=" + webTBox.Text, null, null, "User-Agent: Here Put The User Agent");
+
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void changePortBtn_Click(object sender, EventArgs e)
+        {
+
+            String NewcsvLocation;
+
+            using (OpenFileDialog ofd = new OpenFileDialog() { Filter = "CSV|*.csv", ValidateNames = true })
+            {
+
+                ofd.InitialDirectory = directory;
+
+                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    //csvLocTBox.Text = ofd.FileName;
+                    NewcsvLocation = ofd.FileName;
+                }
+            }
+
+        }
+
+        private void viewPortBtn_Click(object sender, EventArgs e)
+        {
+
+
+
+        }
+
+        private void mkPortBtn_Click(object sender, EventArgs e)
+        {
+
+            createPortfolioForm open = new createPortfolioForm(name, directory);
+            open.Show();
+
+        }
+
 
         /*
          * 
@@ -197,10 +286,9 @@ namespace Project_Madoff
 
     }
 
-
     public class Portfolio
     {
-        public string Ticker   { get; set; }
+        public string  Ticker   { get; set; }
         public string  Shares   { get; set; }
         public string  TotalMon { get; set; }
     }
