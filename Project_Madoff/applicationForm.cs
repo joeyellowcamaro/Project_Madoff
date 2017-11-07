@@ -254,7 +254,8 @@ namespace Project_Madoff
         private void viewPortBtn_Click(object sender, EventArgs e)
         {
 
-
+            viewPortfolioForm open = new viewPortfolioForm(csvLoc);
+            open.Show();
 
         }
 

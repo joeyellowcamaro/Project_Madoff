@@ -60,7 +60,7 @@
             this.createPortBtn.UseVisualStyleBackColor = true;
             this.createPortBtn.Click += new System.EventHandler(this.createPortBtn_Click);
             // 
-            // createProtfolioForm
+            // createPortfolioForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -68,7 +68,8 @@
             this.Controls.Add(this.createPortBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.portNameTBox);
-            this.Name = "createProtfolioForm";
+            this.Name = "createPortfolioForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "createProtfolioForm";
             this.Load += new System.EventHandler(this.createProtfolioForm_Load);
             this.ResumeLayout(false);

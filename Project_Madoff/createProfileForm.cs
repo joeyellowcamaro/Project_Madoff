@@ -76,7 +76,7 @@ namespace Project_Madoff
 
 
 
-            /*
+         /*   
             if (string.IsNullOrEmpty(validName) == true)
             {
                 MessageBox.Show("This profile already exists.\n" +
@@ -114,6 +114,7 @@ namespace Project_Madoff
                 }
             }
             */
+            
 
         }
 

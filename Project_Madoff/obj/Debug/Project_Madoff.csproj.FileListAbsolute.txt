@@ -37,3 +37,4 @@ C:\Users\Joey\Desktop\Project_Madoff-master\Project_Madoff-master\Project_Madoff
 C:\Users\Joey\Desktop\Project_Madoff-master\Project_Madoff-master\Project_Madoff\obj\Debug\Project_Madoff.exe
 C:\Users\Joey\Desktop\Project_Madoff-master\Project_Madoff-master\Project_Madoff\obj\Debug\Project_Madoff.pdb
 C:\Users\Joey\Desktop\Project_Madoff-master\Project_Madoff-master\Project_Madoff\obj\Debug\Project_Madoff.createPortfolioForm.resources
+C:\Users\Joey\Desktop\Project_Madoff-master\Project_Madoff-master\Project_Madoff\obj\Debug\Project_Madoff.viewPortfolioForm.resources

@@ -17,9 +17,6 @@ namespace Project_Madoff
         
         public string userName { get; set; }
         private string directory { get; set; }
-        //public string portName { get; set; }
-
-
 
 
         public createPortfolioForm(string name, string userFolder)
@@ -27,9 +24,7 @@ namespace Project_Madoff
             InitializeComponent();
             
             this.userName = name;
-
             directory = userFolder.TrimEnd('\\');
-            directory.Remove(directory.LastIndexOf('\\') + 2);
 
         }
 
@@ -47,19 +42,21 @@ namespace Project_Madoff
         {
 
             string validCsvPath;
-
             string portName = this.portNameTBox.Text;
 
 
+            directory = directory.Remove(directory.LastIndexOf('\\') + 1);
             validCsvPath = checkCsvName(directory, userName, portName);
 
 
             if (string.IsNullOrEmpty(validCsvPath) == true)
             {
+
                 MessageBox.Show("This csv name already exists.\n" +
                                 "Please chose another csv name or remove the csv\n" +
                                 "filefrom the userdata folder");
                 return;
+
             }
             else
             {
@@ -86,8 +83,6 @@ namespace Project_Madoff
                 }
 
             }
-
-
         }
 
         public string checkCsvName(string directory, string userName, string portName)
@@ -99,7 +94,7 @@ namespace Project_Madoff
 
             if (!exists)
             {
-                path = directory + portName;
+                path = directory + userName + portName;
             }
             else
             {

@@ -78,8 +78,15 @@
     <Compile Include="loginForm.Designer.cs">
       <DependentUpon>loginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="portfolioTemplate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="viewPortfolioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewPortfolioForm.Designer.cs">
+      <DependentUpon>viewPortfolioForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="applicationForm.resx">
       <DependentUpon>applicationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,7 +109,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="viewPortfolioForm.resx">
+      <DependentUpon>viewPortfolioForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\portfolioTemplate.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
