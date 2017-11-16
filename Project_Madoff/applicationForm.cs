@@ -70,6 +70,8 @@ namespace Project_Madoff
                 csvcash         = float.Parse(csvReader.GetField(1));
                 csvportVal      = float.Parse(csvReader.GetField(2));
 
+                //Console.WriteLine("{0}", csvReader.GetField("tsla"));
+
                 this.name    = csvprofileName;
                 this.cash    = csvcash;
                 this.portVal = csvportVal;
@@ -100,78 +102,93 @@ namespace Project_Madoff
 
         private void buyBtn_Click(object sender, EventArgs e)
         {
-
-            
+  
             var quote_service = new QuoteService();
+            float quote;
+            string checkcsvloc;
+            int shares;
+            float totalinvest;
+            float appendtotalinvest;
+
 
             String ticker = this.tickerTBox.Text.Replace(" ", "");
 
 
-           // if (ticker == null)
-           // {
-           //
-           // }
-           // else
-           // {
-           //     var quote = quote_service.Quote(ticker).Return(QuoteReturnParameter.Open);
-            //}
-            
-
-
-
-            /*
-            using (FileStream textwriter = File.Open(csvloc, FileMode.Append, FileAccess.Write))
-            using (var csv = new CsvWriter(textwriter))
+            if (ticker == null)
             {
-
-
-
+                MessageBox.Show("Ticker box is empty");
+                return;
             }
-            */
-
-            // using (var sr = new StreamReader(csvloc))
-            //{
+            else
+            {
+                quote = quote_service.Quote(ticker).Return(QuoteReturnParameter.Open);
+            }
 
             if (sharesTBox.Text != "0")
             {
 
+                checkcsvloc = checkTicker(csvLoc, ticker);
 
-                using (var textreader = new StreamReader(csvLoc))
-                using (var csRead = new CsvReader(textreader))
+                if (checkcsvloc != null)
                 {
 
-
-
-
-
-                }
-
-
-                using (var textWriter = new StreamWriter(csvLoc, append: true))
-                using (var csvWrite = new CsvWriter(textWriter))
-                {
-
-                    var data = new[]
+                    var strLines = File.ReadLines(csvLoc);
+                    foreach (var line in strLines)
                     {
-                        new Portfolio {Ticker = tickerTBox.Text, Shares = sharesTBox.Text, TotalMon = "FIX" }
-                    };
+                        if (line.Split(',')[1].Equals(ticker))
+                        {
+
+                            
+                            shares = Int32.Parse(line.Split(',')[2]) + Int32.Parse(this.sharesTBox.Text);
+                            totalinvest = float.Parse(line.Split(',')[3]) + (quote * float.Parse(this.sharesTBox.Text));
+                            
 
 
-                    csvWrite.Configuration.Delimiter = ",";
-                    csvWrite.Configuration.HasHeaderRecord = false;
-                    csvWrite.Configuration.AutoMap<Portfolio>();
+                            line.Split(',')[2] = shares.ToString();
+                            line.Split(',')[3] = totalinvest.ToString();
 
+                        }
+                        else
+                        {
+                            MessageBox.Show("Something when wrong with buy a share\n");
+                            return;
 
-                    csvWrite.WriteRecords(data);
-                    textWriter.Flush();
-
+                        }
+                    }
                 }
-                
+                else
+                {
+                    appendtotalinvest = quote * float.Parse(this.sharesTBox.Text);
+
+
+                    using (var textWriter = new StreamWriter(csvLoc, append: true))
+                    using (var csvWrite = new CsvWriter(textWriter))
+                    {
+
+                        var data = new[]
+                        {
+                        new Portfolio {Ticker = tickerTBox.Text, Shares = sharesTBox.Text, TotalMon = appendtotalinvest.ToString() }
+                        };
+
+
+                        csvWrite.Configuration.Delimiter = ",";
+                        csvWrite.Configuration.HasHeaderRecord = false;
+                        csvWrite.Configuration.AutoMap<Portfolio>();
+
+
+                        csvWrite.WriteRecords(data);
+                        textWriter.Flush();
+
+
+                    }
+
+                }         
             }
             else
             {
 
-
+                MessageBox.Show("You cannot buy 0 or less shares");
+                return;
 
             }
 
@@ -179,6 +196,73 @@ namespace Project_Madoff
 
         private void sellBtn_Click(object sender, EventArgs e)
         {
+
+            var quote_service = new QuoteService();
+            float quote;
+            string checkcsvloc;
+            int shares;
+            float totalinvest;
+
+            String ticker = this.tickerTBox.Text.Replace(" ", "");
+
+
+            if (ticker == null)
+            {
+                MessageBox.Show("Ticker box is empty");
+                return;
+            }
+            else
+            {
+                quote = quote_service.Quote(ticker).Return(QuoteReturnParameter.Open);
+            }
+
+            if (sharesTBox.Text != "0")
+            {
+
+                checkcsvloc = checkTicker(csvLoc, ticker);
+
+                if (checkcsvloc != null)
+                {
+
+                    var strLines = File.ReadLines(csvLoc);
+                    foreach (var line in strLines)
+                    {
+                        if (line.Split(',')[1].Equals(ticker))
+                        {
+
+
+                            shares = Int32.Parse(line.Split(',')[2]) - Int32.Parse(this.sharesTBox.Text);
+                            totalinvest = float.Parse(line.Split(',')[3]) - (quote * float.Parse(this.sharesTBox.Text));
+
+
+
+                            line.Split(',')[2] = shares.ToString();
+                            line.Split(',')[3] = totalinvest.ToString();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Something when wrong with buy a share\n");
+                            return;
+
+                        }
+                    }
+                }
+                else
+                {
+
+                    MessageBox.Show("You currently do not own any shares in thsi company");
+                    return;
+
+                }
+            }
+            else
+            {
+
+                MessageBox.Show("You cannot buy 0 or less shares");
+                return;
+
+            }
 
         }
 
@@ -267,7 +351,15 @@ namespace Project_Madoff
 
         }
 
+        private string updateHeader(string cash, string portVal)
+        {
+            string cashPortVal = "";
 
+
+
+
+            return cashPortVal;
+        }
         /*
          * 
          * var quote_service = new QuoteService();
@@ -284,7 +376,44 @@ namespace Project_Madoff
          * 
         */
 
+        string checkTicker(string file, string ticker)
+        {
+            string confirm="";
 
+            var strLines = File.ReadLines(file);
+            foreach (var line in strLines)
+            {
+                if (line.Split(',')[1].Equals(ticker))
+                {
+
+                    //return line.Split(',')[2];
+                    //return (boolvar == '1');
+                    confirm = "1";
+
+                }                  
+                else
+                {
+                    confirm = null;
+                }
+            }
+
+            return confirm;
+       
+        }
+
+/*
+        string GetAddress(string file)
+        {
+            var strLines = File.ReadLines("filepath.csv");
+            foreach (var line in strLines)
+            {
+                if (line.Split(',')[1].Equals(searchName))
+                    return line.Split(',')[2];
+            }
+
+            return "";
+        }
+*/
     }
 
     public class Portfolio
